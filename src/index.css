@@ -24,15 +24,20 @@ header {
 }
 
 header > h1 {
-  font-size: 1.25rem;
+  font-size: 2rem;
   font-weight: 500;
   color: #F9F4DA;
 }
 
-header > p {
-  font-size: 0.875rem;
-  max-width: 350px;
-  color: #8E8E8E;
+header > div {
+  padding: 2px 12px 1px 12px;
+  color: #472aba;
+  background-color: #F9F4DA;
+  gap:0px;
+}
+
+.hint {
+  font-size: 1.5rem;
 }
 
 section.game-status {
@@ -58,6 +63,10 @@ section.game-status.farewell {
   border:1px dashed #323232;
 }
 
+section.game-status.correct {
+  background-color: #10A95B;
+  border:1px dashed #323232;
+}
 
 section.game-status > h2 {
   font-size: 1.25rem;

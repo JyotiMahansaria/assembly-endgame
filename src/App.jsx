@@ -104,7 +104,8 @@ export default function AssemblyEndgame() {
   const gameStatusColor = clsx("game-status", {
     won: isGameWon,
     lost: isGameLost,
-    farewell: !isGameOver && isLastGuessIncorrect
+    farewell: !isGameOver && isLastGuessIncorrect,
+    correct: !isGameOver && !isLastGuessIncorrect
   })
 
   function renderGameStatus(){
@@ -112,9 +113,9 @@ export default function AssemblyEndgame() {
       return <p className="farewell-message"> 
         {getFarewellText(languages[wrongGuessCount - 1].name)}
       </p> 
-    }
-
-    if(isGameWon){
+    }else if(!isGameOver && lastGuessedLetter!==undefined && !isLastGuessIncorrect){
+        return <p className="farewell-message"> Well Done! Thats a correct letter! Go on. </p>
+    } else if(isGameWon){
       return (
         <>
           <h2>You win!</h2>  
@@ -122,13 +123,33 @@ export default function AssemblyEndgame() {
         </>
       )
     } 
-    if(isGameLost) {
+    else if(isGameLost) {
       return (
         <>
           <h2>Game Over!</h2> 
           <p>You lose! Better start learning Assembly </p>
         </>
       )
+    }else {
+      return <p className="farewell-message"> 
+            🧠 Game Objective <br />
+            Save a language from extinction!<br />
+            <br />
+            ⌨️ How to Play<br />
+            1. Choose an Alphabet <br />
+              Select a letter from the keyboard to begin.<br />
+            2. Avoid Mistakes <br />
+              Each incorrect letter choice will cause you to lose one of the available languages.<br />
+            3. Protect Your Languages<br />
+              Your goal is to ensure that at least one language remains — other than Assembly.<br />
+            <br />
+            ⚠️ Warning<br />
+            Losing all languages except Assembly will result in a game over<br />
+            <br />
+            🎯 Tip<br />
+            Strategize your letter selections to preserve as many languages as possible.<br />
+
+      </p> 
     }
   }
 
@@ -139,7 +160,10 @@ export default function AssemblyEndgame() {
       } 
       <header>
         <h1>Assembly: Endgame</h1>
-        <p>Guess the word within 8 attempts to keep the programming world safe from Assembly!</p>
+        <div>
+            <p className="hint">Guess the word within 8 attempts</p>
+            <p>to keep the programming world safe from Assembly!</p>
+        </div>
       </header>
       <section 
         aria-live="polite" 
